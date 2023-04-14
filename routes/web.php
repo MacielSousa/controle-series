@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SeriesController;
-
+use App\Http\Controllers\SeasonController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,6 +20,8 @@ Route::get('/', function () {
 
 Route::resource('/series', SeriesController::class)->except(['show']);
 //    ->only(['index', 'create', 'store', 'destroy', 'edit']);
+
+Route::get('/series/{series}/seasons', [SeasonController::class, 'index'])->name('seasons.index');
 
 //Route::delete('/series/destroy/{serieId}', [SeriesController::class, 'destroy'])->name('series.destroy');
 //Route::controller(SeriesController::class)->group(function (){

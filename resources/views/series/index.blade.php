@@ -8,7 +8,9 @@
     <ul class="list-group">
         @foreach ($series as $serie)
             <li class="list-group-item d-flex justify-content-between align-content-center">
-                {{$serie -> nome}}
+               <a href="{{ route('seasons.index', $serie->id) }}">
+                   {{$serie -> nome}}
+               </a>
 
                 <div class="d-flex justify-content-between align-content-center">
                     <a class="btn btn-primary mx-2" href={{route('series.edit', $serie->id)}}>Editar</a>
