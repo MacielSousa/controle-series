@@ -39,6 +39,14 @@ Route::get('/logout', [LoginController::class, 'destroy'])->name('logout');
 Route::get('/register', [UserController::class, 'create'])->name('users.create');
 Route::post('/register', [UserController::class, 'store'])->name('users.create');
 
+Route::get('/email', function (){
+   return new \App\Mail\SeriesCreated(
+       nomeSerie: 'Série de teste',
+       idSerie: 1,
+       qtdTemporadas: 5,
+       episodiosPorTemporada: 10,
+   );
+});
 //Route::delete('/series/destroy/{serieId}', [SeriesController::class, 'destroy'])->name('series.destroy');
 //Route::controller(SeriesController::class)->group(function (){
 //    Route::get('/series', 'listarSeries')->name('series.index');
