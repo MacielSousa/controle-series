@@ -32,20 +32,13 @@ class SeriesController extends Controller
     {
         $serie = $this->repository->add($request);
 
-        $users = User::all();
-
-        foreach ($users  as $index => $user)
-        {
-            $email = new SeriesCreated(
-                $serie->nome,
-                $serie->id,
-                $request->seasonsQty,
-                $request->episodesPerSeason,
-            );
-            $when = now()->addSeconds($index * 2);
-            Mail::to($user)->later($when ,$email);
-        }
-//        Mail::to(Auth::user()); Outra forma de pegar o usuario logado
+        //Disparando o evento;
+        \App\Events\SeriesCreated::dispatch(
+            $serie->nome,
+            $serie->id,
+            $request->seasonsQty,
+            $request->episodesPerSeason
+        );
 
         return to_route('series.index')
             ->with('mensagem.sucesso', "Série '{$serie->nome}' adicionada com sucesso");;
