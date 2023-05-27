@@ -32,6 +32,7 @@ class SeriesController extends Controller
     {
         $serie = $this->repository->add($request);
 
+        //Comando para disparar os eventos: php artisan queue:listen --tries=2
         //Disparando o evento;
         \App\Events\SeriesCreated::dispatch(
             $serie->nome,
